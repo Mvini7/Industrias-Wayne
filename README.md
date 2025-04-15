@@ -1,6 +1,6 @@
 # Wayne Security - Sistema de Gerenciamento de Segurança
 
-![Wayne Security Logo](pagina-inicial.jpg)
+![Wayne Security Logo](https://github.com/Mvini7/Industrias-Wayne/blob/main/pagina-inicial.png)
 
 ## Sobre o Projeto
 
