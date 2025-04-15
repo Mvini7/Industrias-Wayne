@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "username": "bruce",
+        "password": "wayne123",
+        "name": "Bruce Wayne",
+        "role": "owner"
+    },
+    {
+        "id": 2,
+        "username": "alfred",
+        "password": "pennyworth123",
+        "name": "Alfred Pennyworth",
+        "role": "manager"
+    },
+    {
+        "id": 3,
+        "username": "lucius",
+        "password": "fox123",
+        "name": "Lucius Fox",
+        "role": "equipment"
+    },
+    {
+        "id": 4,
+        "username": "gordon",
+        "password": "jim123",
+        "name": "Jim Gordon",
+        "role": "calls"
+    }
+]

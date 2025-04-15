@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chamados - Wayne Security</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="min-h-screen bg-gray-900 text-white">
+    <header class="bg-gray-800 shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-shield-alt text-blue-500 text-2xl"></i>
+                <h1 class="text-xl font-bold">Wayne Security</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-300 hidden sm:inline" id="user-greeting">Olá, Usuário</span>
+                <button id="mobile-menu-btn" class="text-gray-300 sm:hidden">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="dashboard.html" class="text-gray-300 hover:text-white flex items-center space-x-1 hidden sm:flex">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Voltar</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu">
+        <div class="flex justify-between items-center mb-6">
+            <span class="text-gray-300" id="mobile-user-greeting">Olá, Usuário</span>
+            <button id="mobile-menu-close" class="text-gray-300">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <a href="dashboard.html" class="block text-gray-300 hover:text-white py-2 px-4 rounded-md mb-2">
+            <i class="fas fa-arrow-left mr-2"></i> Voltar para Dashboard
+        </a>
+    </div>
+
+    <main class="container mx-auto px-4 py-6 md:py-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 md:mb-6 gap-4 sm:gap-0">
+            <h2 class="text-xl md:text-2xl font-bold">Gestão de Chamados</h2>
+            <button id="add-call-btn" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 flex items-center w-full sm:w-auto justify-center sm:justify-start">
+                <i class="fas fa-plus mr-2"></i>
+                Novo Chamado
+            </button>
+        </div>
+
+        <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+            <div class="responsive-table">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-gray-700">
+                            <th class="px-4 py-3 text-left">ID</th>
+                            <th class="px-4 py-3 text-left">Título</th>
+                            <th class="px-4 py-3 text-left hide-on-mobile">Descrição</th>
+                            <th class="px-4 py-3 text-left">Data</th>
+                            <th class="px-4 py-3 text-left">Status</th>
+                            <th class="px-4 py-3 text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calls-table-body">
+                        <!-- Calls will be dynamically inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Call Modal -->
+    <div id="add-call-modal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
+        <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+        
+        <div class="modal-container bg-gray-800 w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+            <div class="modal-content py-4 text-left px-6">
+                <div class="flex justify-between items-center pb-3">
+                    <p class="text-xl md:text-2xl font-bold">Adicionar Novo Chamado</p>
+                    <div class="modal-close cursor-pointer z-50">
+                        <i class="fas fa-times text-gray-400 hover:text-gray-200"></i>
+                    </div>
+                </div>
+
+                <div class="space-y-4 mt-4">
+                    <div>
+                        <label for="call-title" class="block text-sm font-medium text-gray-300 mb-1">Título</label>
+                        <input id="call-title" type="text" class="bg-gray-700 border border-gray-600 text-white rounded-md w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Título do chamado">
+                    </div>
+                    <div>
+                        <label for="call-description" class="block text-sm font-medium text-gray-300 mb-1">Descrição</label>
+                        <textarea id="call-description" class="bg-gray-700 border border-gray-600 text-white rounded-md w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Descreva o chamado" rows="3"></textarea>
+                    </div>
+                    <div>
+                        <label for="call-status" class="block text-sm font-medium text-gray-300 mb-1">Status</label>
+                        <select id="call-status" class="bg-gray-700 border border-gray-600 text-white rounded-md w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <option value="in-progress">Em Andamento</option>
+                            <option value="resolved">Resolvido</option>
+                            <option value="discarded">Descartado</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="call-date" class="block text-sm font-medium text-gray-300 mb-1">Data</label>
+                        <input id="call-date" type="date" class="bg-gray-700 border border-gray-600 text-white rounded-md w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div class="flex justify-end pt-4">
+                        <button id="add-call-submit" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                            Adicionar Chamado
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/calls.js"></script>
+</body>
+</html>
